@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BookBridge — Lend. Borrow. Connect.</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- ───────────────────────── NAVBAR ───────────────────────── -->
+  <header class="navbar" id="navbar">
+    <div class="nav-inner container">
+      <a href="#" class="nav-logo" aria-label="BookBridge Home">
+        <span class="logo-icon" aria-hidden="true">⟡</span>
+        BookBridge
+      </a>
+
+      <nav class="nav-links" role="navigation" aria-label="Main navigation">
+        <a href="#how-it-works" class="nav-link">How it Works</a>
+        <a href="#browse" class="nav-link">Browse Books</a>
+        <a href="#community" class="nav-link">Community</a>
+        <a href="#about" class="nav-link">About</a>
+      </nav>
+
+      <div class="nav-actions">
+        <button class="btn btn-ghost" id="loginBtn">Log In</button>
+        <button class="btn btn-primary" id="joinBtn">Join Free</button>
+      </div>
+
+      <button class="nav-hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+
+    <!-- Mobile menu -->
+    <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+      <a href="#how-it-works" class="mobile-link">How it Works</a>
+      <a href="#browse" class="mobile-link">Browse Books</a>
+      <a href="#community" class="mobile-link">Community</a>
+      <a href="#about" class="mobile-link">About</a>
+      <div class="mobile-actions">
+        <button class="btn btn-ghost">Log In</button>
+        <button class="btn btn-primary">Join Free</button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ───────────────────────── HERO ───────────────────────── -->
+    <section class="hero" id="hero">
+      <div class="hero-bg" aria-hidden="true">
+        <div class="hero-orb hero-orb--1"></div>
+        <div class="hero-orb hero-orb--2"></div>
+        <div class="hero-grid"></div>
+      </div>
+
+      <div class="container hero-content">
+        <div class="hero-badge">
+          <span class="badge-dot"></span>
+          2,400+ books available right now
+        </div>
+
+        <h1 class="hero-headline">
+          Share stories.<br />
+          <em>Build community.</em>
+        </h1>
+
+        <p class="hero-sub">
+          BookBridge connects readers in your city. Lend a book you've loved, borrow one you've been wanting — no fees, no friction, just neighbours sharing stories.
+        </p>
+
+        <div class="hero-cta">
+          <button class="btn btn-primary btn-lg" id="heroBrowseBtn">Browse Books Near You</button>
+          <button class="btn btn-outline btn-lg" id="heroLendBtn">Lend Your Books</button>
+        </div>
+
+        <div class="hero-stats">
+          <div class="stat">
+            <strong>12,000+</strong>
+            <span>Readers</span>
+          </div>
+          <div class="stat-divider" aria-hidden="true"></div>
+          <div class="stat">
+            <strong>2,400+</strong>
+            <span>Books Listed</span>
+          </div>
+          <div class="stat-divider" aria-hidden="true"></div>
+          <div class="stat">
+            <strong>40+</strong>
+            <span>Cities</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Floating book cards decoration -->
+      <div class="hero-float" aria-hidden="true">
+        <div class="float-card float-card--a">
+          <div class="float-card-cover" style="background: linear-gradient(135deg,#1e3a5f,#2563eb)"></div>
+          <div class="float-card-info"><strong>Atomic Habits</strong><span>Available</span></div>
+        </div>
+        <div class="float-card float-card--b">
+          <div class="float-card-cover" style="background: linear-gradient(135deg,#0f4c81,#38bdf8)"></div>
+          <div class="float-card-info"><strong>Deep Work</strong><span>Available</span></div>
+        </div>
+        <div class="float-card float-card--c">
+          <div class="float-card-cover" style="background: linear-gradient(135deg,#1a3a6b,#60a5fa)"></div>
+          <div class="float-card-info"><strong>Sapiens</strong><span>3 copies</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ───────────────────────── HOW IT WORKS ───────────────────────── -->
+    <section class="how-it-works section" id="how-it-works">
+      <div class="container">
+        <div class="section-label">Simple Process</div>
+        <h2 class="section-title">Lending made effortless</h2>
+        <p class="section-sub">Three steps between you and your next great read.</p>
+
+        <div class="steps-grid">
+          <article class="step-card">
+            <div class="step-number">01</div>
+            <div class="step-icon" aria-hidden="true">📚</div>
+            <h3>List your books</h3>
+            <p>Add books you're happy to lend. Set availability, condition, and lending period in seconds.</p>
+          </article>
+
+          <div class="steps-connector" aria-hidden="true"></div>
+
+          <article class="step-card">
+            <div class="step-number">02</div>
+            <div class="step-icon" aria-hidden="true">🔍</div>
+            <h3>Discover nearby</h3>
+            <p>Browse thousands of books available in your neighbourhood, filtered by genre, distance, or rating.</p>
+          </article>
+
+          <div class="steps-connector" aria-hidden="true"></div>
+
+          <article class="step-card">
+            <div class="step-number">03</div>
+            <div class="step-icon" aria-hidden="true">🤝</div>
+            <h3>Connect & exchange</h3>
+            <p>Message the lender, agree on a handoff, and enjoy your book. Leave a review when done.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ───────────────────────── SEARCH / BROWSE ───────────────────────── -->
+    <section class="browse section" id="browse">
+      <div class="container">
+        <div class="browse-header">
+          <div>
+            <div class="section-label">Community Library</div>
+            <h2 class="section-title">Available near you</h2>
+          </div>
+          <div class="browse-controls">
+            <div class="search-bar">
+              <span class="search-icon" aria-hidden="true">⌕</span>
+              <input type="search" id="searchInput" placeholder="Title, author, or genre…" aria-label="Search books" />
+            </div>
+            <div class="filter-tabs" role="tablist" aria-label="Book genre filter">
+              <button class="filter-tab active" role="tab" aria-selected="true" data-filter="all">All</button>
+              <button class="filter-tab" role="tab" aria-selected="false" data-filter="fiction">Fiction</button>
+              <button class="filter-tab" role="tab" aria-selected="false" data-filter="non-fiction">Non-Fiction</button>
+              <button class="filter-tab" role="tab" aria-selected="false" data-filter="sci-fi">Sci-Fi</button>
+              <button class="filter-tab" role="tab" aria-selected="false" data-filter="self-help">Self-Help</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="books-grid" id="booksGrid" role="list" aria-label="Available books">
+          <!-- Cards injected by script.js -->
+        </div>
+
+        <div class="no-results hidden" id="noResults" role="status" aria-live="polite">
+          <span aria-hidden="true">📭</span>
+          <p>No books matched your search. Try a different keyword or genre.</p>
+        </div>
+
+        <div class="browse-footer">
+          <button class="btn btn-outline" id="loadMoreBtn">Load more books</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ───────────────────────── LEND FORM ───────────────────────── -->
+    <section class="lend section" id="lend">
+      <div class="container lend-inner">
+        <div class="lend-copy">
+          <div class="section-label">Share Your Shelf</div>
+          <h2 class="section-title">Got a book someone else would love?</h2>
+          <p>Adding your books takes under a minute. Help a neighbour discover their next favourite read.</p>
+          <ul class="lend-perks">
+            <li><span class="perk-check" aria-hidden="true">✓</span> Completely free, always</li>
+            <li><span class="perk-check" aria-hidden="true">✓</span> You control availability</li>
+            <li><span class="perk-check" aria-hidden="true">✓</span> Build your reader reputation</li>
+            <li><span class="perk-check" aria-hidden="true">✓</span> Meet fellow book lovers</li>
+          </ul>
+        </div>
+
+        <div class="lend-form-card">
+          <h3>List a Book</h3>
+          <form id="lendForm" novalidate aria-label="List a book for lending">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="bookTitle">Book Title <span class="required" aria-label="required">*</span></label>
+                <input type="text" id="bookTitle" name="bookTitle" placeholder="e.g. The Alchemist" required autocomplete="off" />
+                <span class="field-error" id="titleError" role="alert"></span>
+              </div>
+              <div class="form-group">
+                <label for="bookAuthor">Author <span class="required" aria-label="required">*</span></label>
+                <input type="text" id="bookAuthor" name="bookAuthor" placeholder="e.g. Paulo Coelho" required autocomplete="off" />
+                <span class="field-error" id="authorError" role="alert"></span>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="bookGenre">Genre <span class="required" aria-label="required">*</span></label>
+                <div class="select-wrapper">
+                  <select id="bookGenre" name="bookGenre" required>
+                    <option value="" disabled selected>Select genre</option>
+                    <option value="fiction">Fiction</option>
+                    <option value="non-fiction">Non-Fiction</option>
+                    <option value="sci-fi">Sci-Fi</option>
+                    <option value="self-help">Self-Help</option>
+                    <option value="biography">Biography</option>
+                    <option value="history">History</option>
+                    <option value="mystery">Mystery</option>
+                    <option value="romance">Romance</option>
+                    <option value="other">Other</option>
+                  </select>
+                  <span class="select-arrow" aria-hidden="true">▾</span>
+                </div>
+                <span class="field-error" id="genreError" role="alert"></span>
+              </div>
+              <div class="form-group">
+                <label for="bookCondition">Condition <span class="required" aria-label="required">*</span></label>
+                <div class="select-wrapper">
+                  <select id="bookCondition" name="bookCondition" required>
+                    <option value="" disabled selected>Select condition</option>
+                    <option value="like-new">Like New</option>
+                    <option value="good">Good</option>
+                    <option value="fair">Fair</option>
+                    <option value="worn">Well-loved</option>
+                  </select>
+                  <span class="select-arrow" aria-hidden="true">▾</span>
+                </div>
+                <span class="field-error" id="conditionError" role="alert"></span>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="bookLocation">Your Area / Neighbourhood <span class="required" aria-label="required">*</span></label>
+              <input type="text" id="bookLocation" name="bookLocation" placeholder="e.g. Indiranagar, Bangalore" required autocomplete="off" />
+              <span class="field-error" id="locationError" role="alert"></span>
+            </div>
+
+            <div class="form-group">
+              <label for="bookDescription">Short Description <span class="optional">(optional)</span></label>
+              <textarea id="bookDescription" name="bookDescription" rows="3" placeholder="A brief note about the book or why you liked it…" maxlength="300"></textarea>
+              <span class="char-count" id="charCount">0 / 300</span>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-full" id="lendSubmitBtn">
+              <span class="btn-text">List My Book</span>
+              <span class="btn-loading hidden" aria-hidden="true">Adding…</span>
+            </button>
+
+            <p class="form-disclaimer">By listing, you agree to our <a href="#">community guidelines</a>.</p>
+          </form>
+
+          <div class="form-success hidden" id="formSuccess" role="status" aria-live="polite">
+            <div class="success-icon" aria-hidden="true">✓</div>
+            <h4>Book listed!</h4>
+            <p>Your book is now visible to readers nearby. Thank you for sharing.</p>
+            <button class="btn btn-outline" id="listAnotherBtn">List another book</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ───────────────────────── COMMUNITY ───────────────────────── -->
+    <section class="community section" id="community">
+      <div class="container">
+        <div class="section-label">Real Stories</div>
+        <h2 class="section-title">Readers love BookBridge</h2>
+        <p class="section-sub">From first-time borrowers to seasoned lenders — here's what our community says.</p>
+
+        <div class="testimonials-grid" id="testimonialsGrid">
+          <!-- Injected by script.js -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ───────────────────────── CTA BANNER ───────────────────────── -->
+    <section class="cta-banner section" id="about">
+      <div class="container cta-inner">
+        <div class="cta-bg" aria-hidden="true">
+          <div class="cta-orb cta-orb--1"></div>
+          <div class="cta-orb cta-orb--2"></div>
+        </div>
+        <div class="cta-content">
+          <h2>Your next book is one neighbour away.</h2>
+          <p>Join BookBridge today — it's free, it's local, and it's full of great reads.</p>
+          <div class="cta-actions">
+            <button class="btn btn-white btn-lg" id="ctaJoinBtn">Get Started — It's Free</button>
+            <button class="btn btn-ghost-white btn-lg" id="ctaLearnBtn">Learn More</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ───────────────────────── FOOTER ───────────────────────── -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <a href="#" class="nav-logo" aria-label="BookBridge Home">
+          <span class="logo-icon" aria-hidden="true">⟡</span>
+          BookBridge
+        </a>
+        <p>Connecting readers, one book at a time.</p>
+        <div class="footer-social" aria-label="Social media links">
+          <a href="#" class="social-link" aria-label="Twitter">𝕏</a>
+          <a href="#" class="social-link" aria-label="Instagram">◈</a>
+          <a href="#" class="social-link" aria-label="LinkedIn">in</a>
+        </div>
+      </div>
+
+      <nav class="footer-nav" aria-label="Footer navigation">
+        <div class="footer-col">
+          <h4>Platform</h4>
+          <a href="#browse">Browse Books</a>
+          <a href="#lend">Lend Books</a>
+          <a href="#how-it-works">How it Works</a>
+          <a href="#community">Community</a>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <a href="#">About Us</a>
+          <a href="#">Blog</a>
+          <a href="#">Press Kit</a>
+          <a href="#">Careers</a>
+        </div>
+        <div class="footer-col">
+          <h4>Support</h4>
+          <a href="#">Help Centre</a>
+          <a href="#">Community Guidelines</a>
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Service</a>
+        </div>
+      </nav>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="container">
+        <p>© <span id="year"></span> BookBridge. Made with <span aria-label="love">♥</span> for readers everywhere.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ───────────────────────── MODAL ───────────────────────── -->
+  <div class="modal-overlay hidden" id="modalOverlay" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal">
+      <button class="modal-close" id="modalClose" aria-label="Close modal">✕</button>
+      <div class="modal-body" id="modalBody">
+        <!-- Dynamic content injected by script.js -->
+      </div>
+    </div>
+  </div>
+
+  <!-- ───────────────────────── TOAST ───────────────────────── -->
+  <div class="toast-container" id="toastContainer" aria-live="polite" aria-atomic="true"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
