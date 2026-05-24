@@ -1,0 +1,893 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BookBridge — Log In</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    /* ── TOKENS (identical to main site) ── */
+    :root {
+      --blue-950: #03102b;
+      --blue-900: #071e46;
+      --blue-800: #0c2d6b;
+      --blue-700: #1446a0;
+      --blue-600: #1d5fcc;
+      --blue-500: #2563eb;
+      --blue-400: #3b82f6;
+      --blue-300: #60a5fa;
+      --blue-200: #93c5fd;
+      --blue-100: #dbeafe;
+      --blue-50:  #eff6ff;
+      --gray-950: #0a0f1a;
+      --gray-900: #111827;
+      --gray-800: #1f2937;
+      --gray-700: #374151;
+      --gray-600: #4b5563;
+      --gray-500: #6b7280;
+      --gray-400: #9ca3af;
+      --gray-300: #d1d5db;
+      --gray-200: #e5e7eb;
+      --gray-100: #f3f4f6;
+      --gray-50:  #f9fafb;
+      --white: #ffffff;
+      --green-500: #22c55e;
+      --green-100: #dcfce7;
+      --font-display: 'Fraunces', Georgia, serif;
+      --font-body: 'DM Sans', system-ui, sans-serif;
+      --radius-sm: 6px;
+      --radius-md: 12px;
+      --radius-lg: 20px;
+      --radius-xl: 28px;
+      --radius-full: 9999px;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,.06);
+      --shadow-md: 0 4px 16px rgba(0,0,0,.08);
+      --shadow-lg: 0 12px 40px rgba(0,0,0,.10);
+      --shadow-xl: 0 24px 64px rgba(0,0,0,.12);
+      --shadow-blue: 0 8px 32px rgba(37,99,235,.22);
+      --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+      --dur-fast: 150ms;
+      --dur-base: 240ms;
+      --dur-slow: 400ms;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { height: 100%; }
+    body {
+      font-family: var(--font-body);
+      font-size: 16px;
+      line-height: 1.6;
+      color: var(--gray-900);
+      background: var(--gray-50);
+      min-height: 100%;
+      display: flex;
+      flex-direction: column;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    button { cursor: pointer; border: none; background: none; font-family: inherit; }
+    input { font-family: inherit; }
+
+    /* ── PAGE LAYOUT ── */
+    .page {
+      flex: 1;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 100vh;
+    }
+
+    /* ── LEFT PANEL ── */
+    .left-panel {
+      position: relative;
+      background: linear-gradient(145deg, var(--blue-900) 0%, var(--blue-700) 55%, var(--blue-500) 100%);
+      display: flex;
+      flex-direction: column;
+      padding: 2.5rem;
+      overflow: hidden;
+    }
+
+    .left-bg {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+    }
+    .left-orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(70px);
+    }
+    .left-orb--1 {
+      width: 380px; height: 380px;
+      background: radial-gradient(circle, rgba(96,165,250,.35), transparent 70%);
+      top: -100px; right: -80px;
+      animation: floatOrb 14s ease-in-out infinite alternate;
+    }
+    .left-orb--2 {
+      width: 280px; height: 280px;
+      background: radial-gradient(circle, rgba(37,99,235,.4), transparent 70%);
+      bottom: -60px; left: -40px;
+      animation: floatOrb 18s ease-in-out infinite alternate-reverse;
+    }
+    .left-grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.06) 1px, transparent 1px);
+      background-size: 48px 48px;
+    }
+    @keyframes floatOrb {
+      from { transform: translate(0,0) scale(1); }
+      to   { transform: translate(24px,32px) scale(1.1); }
+    }
+
+    .left-content {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+
+    /* Logo */
+    .panel-logo {
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+      font-family: var(--font-display);
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: auto;
+    }
+    .logo-icon { color: rgba(255,255,255,.75); font-size: 1.5rem; }
+
+    /* Center copy */
+    .panel-copy {
+      margin: auto 0;
+    }
+    .panel-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: .45rem;
+      font-size: .75rem;
+      font-weight: 600;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,.6);
+      background: rgba(255,255,255,.1);
+      border: 1px solid rgba(255,255,255,.15);
+      padding: .3rem .85rem;
+      border-radius: var(--radius-full);
+      margin-bottom: 1.25rem;
+    }
+    .badge-dot {
+      width: 6px; height: 6px;
+      background: var(--green-500);
+      border-radius: 50%;
+      box-shadow: 0 0 0 3px rgba(34,197,94,.25);
+      animation: pulse 2.5s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%,100% { box-shadow: 0 0 0 3px rgba(34,197,94,.25); }
+      50%      { box-shadow: 0 0 0 5px rgba(34,197,94,.1); }
+    }
+
+    .panel-headline {
+      font-family: var(--font-display);
+      font-size: clamp(1.9rem, 3vw, 2.8rem);
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1.1;
+      letter-spacing: -.025em;
+      margin-bottom: 1rem;
+    }
+    .panel-headline em {
+      font-style: italic;
+      font-weight: 400;
+      color: var(--blue-200);
+    }
+    .panel-sub {
+      font-size: 1rem;
+      color: rgba(255,255,255,.65);
+      line-height: 1.7;
+      max-width: 36ch;
+      margin-bottom: 2rem;
+    }
+
+    /* Floating testimonial card */
+    .panel-testimonial {
+      background: rgba(255,255,255,.1);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255,255,255,.15);
+      border-radius: var(--radius-lg);
+      padding: 1.25rem 1.5rem;
+      max-width: 340px;
+    }
+    .panel-testimonial p {
+      font-size: .9rem;
+      color: rgba(255,255,255,.85);
+      line-height: 1.65;
+      font-style: italic;
+      margin-bottom: .875rem;
+    }
+    .testimonial-author {
+      display: flex;
+      align-items: center;
+      gap: .75rem;
+    }
+    .t-avatar {
+      width: 34px; height: 34px;
+      border-radius: 50%;
+      background: rgba(255,255,255,.2);
+      display: grid;
+      place-items: center;
+      font-size: .8rem;
+      font-weight: 700;
+      color: var(--white);
+      flex-shrink: 0;
+    }
+    .t-name { font-size: .875rem; font-weight: 600; color: var(--white); }
+    .t-city { font-size: .78rem; color: rgba(255,255,255,.55); }
+    .t-stars { color: #fbbf24; font-size: .85rem; letter-spacing: .05em; }
+
+    /* Stats row at bottom */
+    .panel-stats {
+      display: flex;
+      gap: 2rem;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(255,255,255,.1);
+      margin-top: 2rem;
+    }
+    .p-stat strong {
+      display: block;
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1.1;
+    }
+    .p-stat span {
+      font-size: .78rem;
+      color: rgba(255,255,255,.5);
+      font-weight: 500;
+    }
+
+    /* ── RIGHT PANEL ── */
+    .right-panel {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 3rem 2rem;
+      background: var(--white);
+      overflow-y: auto;
+    }
+
+    .form-card {
+      width: 100%;
+      max-width: 420px;
+      animation: slideUp var(--dur-slow) var(--ease-out) both;
+    }
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: none; }
+    }
+
+    .form-card-header {
+      margin-bottom: 2rem;
+    }
+    .form-card-header h1 {
+      font-family: var(--font-display);
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--gray-900);
+      letter-spacing: -.025em;
+      line-height: 1.15;
+      margin-bottom: .4rem;
+    }
+    .form-card-header p {
+      font-size: .9375rem;
+      color: var(--gray-500);
+    }
+    .form-card-header p a {
+      color: var(--blue-500);
+      font-weight: 600;
+      transition: color var(--dur-fast);
+    }
+    .form-card-header p a:hover { color: var(--blue-700); text-decoration: underline; }
+
+    /* Social login buttons */
+    .social-btns {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: .75rem;
+      margin-bottom: 1.5rem;
+    }
+    .social-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: .5rem;
+      padding: .65rem 1rem;
+      border: 1.5px solid var(--gray-200);
+      border-radius: var(--radius-md);
+      font-size: .875rem;
+      font-weight: 600;
+      color: var(--gray-700);
+      background: var(--white);
+      transition: all var(--dur-fast);
+    }
+    .social-btn:hover {
+      border-color: var(--gray-300);
+      background: var(--gray-50);
+      color: var(--gray-900);
+    }
+    .social-btn svg { width: 18px; height: 18px; flex-shrink: 0; }
+
+    /* Divider */
+    .divider {
+      display: flex;
+      align-items: center;
+      gap: .875rem;
+      margin-bottom: 1.5rem;
+      color: var(--gray-400);
+      font-size: .8125rem;
+    }
+    .divider::before,
+    .divider::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--gray-200);
+    }
+
+    /* Form fields */
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: .4rem;
+      margin-bottom: 1.1rem;
+    }
+    .form-group label {
+      font-size: .875rem;
+      font-weight: 600;
+      color: var(--gray-700);
+    }
+
+    .input-wrapper {
+      position: relative;
+    }
+    .input-icon {
+      position: absolute;
+      left: .9rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--gray-400);
+      pointer-events: none;
+      font-size: 1rem;
+      line-height: 1;
+    }
+    .input-wrapper input {
+      width: 100%;
+      padding: .7rem 1rem .7rem 2.6rem;
+      border: 1.5px solid var(--gray-200);
+      border-radius: var(--radius-md);
+      font-size: .9375rem;
+      color: var(--gray-900);
+      background: var(--gray-50);
+      outline: none;
+      transition: border-color var(--dur-fast), box-shadow var(--dur-fast), background var(--dur-fast);
+    }
+    .input-wrapper input::placeholder { color: var(--gray-400); }
+    .input-wrapper input:focus {
+      border-color: var(--blue-500);
+      box-shadow: 0 0 0 3px rgba(37,99,235,.12);
+      background: var(--white);
+    }
+    .input-wrapper input.error {
+      border-color: #ef4444;
+      box-shadow: 0 0 0 3px rgba(239,68,68,.1);
+    }
+
+    /* Password toggle */
+    .pw-toggle {
+      position: absolute;
+      right: .85rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--gray-400);
+      font-size: .875rem;
+      padding: .25rem;
+      border-radius: 4px;
+      transition: color var(--dur-fast);
+      line-height: 1;
+    }
+    .pw-toggle:hover { color: var(--gray-700); }
+
+    .field-error {
+      font-size: .8rem;
+      color: #ef4444;
+      min-height: 1em;
+    }
+
+    /* Remember / forgot row */
+    .form-row-inline {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1.5rem;
+    }
+    .checkbox-label {
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+      font-size: .875rem;
+      color: var(--gray-600);
+      cursor: pointer;
+    }
+    .checkbox-label input[type="checkbox"] {
+      width: 16px; height: 16px;
+      accent-color: var(--blue-500);
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+    .forgot-link {
+      font-size: .875rem;
+      font-weight: 600;
+      color: var(--blue-500);
+      transition: color var(--dur-fast);
+    }
+    .forgot-link:hover { color: var(--blue-700); text-decoration: underline; }
+
+    /* Submit button */
+    .btn-submit {
+      width: 100%;
+      padding: .85rem 1.5rem;
+      background: var(--blue-500);
+      color: var(--white);
+      font-size: 1rem;
+      font-weight: 600;
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-blue);
+      transition: background var(--dur-base), transform var(--dur-base), box-shadow var(--dur-base);
+      position: relative;
+      overflow: hidden;
+      margin-bottom: 1.25rem;
+    }
+    .btn-submit:hover {
+      background: var(--blue-600);
+      transform: translateY(-1px);
+      box-shadow: 0 12px 36px rgba(37,99,235,.3);
+    }
+    .btn-submit:active { transform: none; }
+    .btn-submit:disabled { opacity: .6; cursor: not-allowed; transform: none; }
+
+    .btn-submit .btn-text  { transition: opacity var(--dur-fast); }
+    .btn-submit .btn-loading {
+      position: absolute;
+      inset: 0;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      gap: .5rem;
+      font-size: .9375rem;
+    }
+    .btn-submit.loading .btn-text    { opacity: 0; }
+    .btn-submit.loading .btn-loading { display: flex; }
+
+    /* Spinner */
+    .spinner {
+      width: 18px; height: 18px;
+      border: 2px solid rgba(255,255,255,.35);
+      border-top-color: var(--white);
+      border-radius: 50%;
+      animation: spin .7s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* Terms note */
+    .form-note {
+      font-size: .8rem;
+      color: var(--gray-400);
+      text-align: center;
+      line-height: 1.6;
+    }
+    .form-note a { color: var(--blue-500); }
+    .form-note a:hover { text-decoration: underline; }
+
+    /* Success state */
+    .login-success {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: 1rem 0;
+      animation: slideUp var(--dur-slow) var(--ease-out) both;
+    }
+    .success-ring {
+      width: 72px; height: 72px;
+      border-radius: 50%;
+      background: var(--green-100);
+      display: grid;
+      place-items: center;
+      font-size: 2rem;
+      margin-bottom: 1.25rem;
+    }
+    .login-success h2 {
+      font-family: var(--font-display);
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--gray-900);
+      margin-bottom: .5rem;
+    }
+    .login-success p {
+      font-size: .9375rem;
+      color: var(--gray-500);
+      margin-bottom: 1.5rem;
+    }
+    .btn-home {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      padding: .7rem 1.5rem;
+      background: var(--blue-500);
+      color: var(--white);
+      font-size: .9375rem;
+      font-weight: 600;
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-blue);
+      transition: background var(--dur-base), transform var(--dur-base);
+      text-decoration: none;
+    }
+    .btn-home:hover { background: var(--blue-600); transform: translateY(-1px); }
+
+    /* Toast */
+    .toast-container {
+      position: fixed;
+      bottom: 1.5rem;
+      right: 1.5rem;
+      z-index: 1000;
+      display: flex;
+      flex-direction: column;
+      gap: .5rem;
+    }
+    .toast {
+      display: flex;
+      align-items: center;
+      gap: .75rem;
+      background: var(--gray-900);
+      color: var(--white);
+      padding: .875rem 1.1rem;
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-xl);
+      font-size: .9rem;
+      animation: toastIn .4s var(--ease-out) both;
+      max-width: 340px;
+    }
+    @keyframes toastIn {
+      from { opacity: 0; transform: translateX(80px) scale(.95); }
+      to   { opacity: 1; transform: none; }
+    }
+    .toast.out { animation: toastOut .2s ease forwards; }
+    @keyframes toastOut { to { opacity: 0; transform: translateX(80px); } }
+    .toast-icon.success { color: var(--green-500); }
+    .toast-icon.error   { color: #f87171; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 860px) {
+      .page { grid-template-columns: 1fr; }
+      .left-panel {
+        display: none; /* hide decorative panel on small screens */
+      }
+      .right-panel { justify-content: flex-start; padding-top: 2.5rem; }
+      .right-panel::before {
+        content: '⟡ BookBridge';
+        display: block;
+        font-family: var(--font-display);
+        font-size: 1.2rem;
+        font-weight: 700;
+        color: var(--blue-500);
+        margin-bottom: 2rem;
+        width: 100%;
+        max-width: 420px;
+      }
+    }
+    @media (max-width: 480px) {
+      .right-panel { padding: 1.5rem 1.25rem; }
+      .social-btns { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<main class="page">
+
+  <!-- ── LEFT DECORATIVE PANEL ── -->
+  <aside class="left-panel" aria-hidden="true">
+    <div class="left-bg">
+      <div class="left-orb left-orb--1"></div>
+      <div class="left-orb left-orb--2"></div>
+      <div class="left-grid"></div>
+    </div>
+
+    <div class="left-content">
+      <!-- Logo -->
+      <div class="panel-logo">
+        <span class="logo-icon">⟡</span>
+        BookBridge
+      </div>
+
+      <!-- Headline -->
+      <div class="panel-copy">
+        <div class="panel-eyebrow">
+          <span class="badge-dot"></span>
+          2,400+ books available
+        </div>
+        <h2 class="panel-headline">
+          Welcome<br/>
+          <em>back, reader.</em>
+        </h2>
+        <p class="panel-sub">
+          Your community library is waiting. Pick up where you left off or discover something new today.
+        </p>
+
+        <!-- Testimonial card -->
+        <div class="panel-testimonial">
+          <p>"Found my entire reading list for the year through BookBridge. The community here is so warm and generous."</p>
+          <div class="testimonial-author">
+            <div class="t-avatar">AS</div>
+            <div>
+              <div class="t-name">Ananya Singh</div>
+              <div class="t-city">Bangalore</div>
+            </div>
+            <div class="t-stars" style="margin-left:auto">★★★★★</div>
+          </div>
+        </div>
+
+        <!-- Stats -->
+        <div class="panel-stats">
+          <div class="p-stat">
+            <strong>12,000+</strong>
+            <span>Readers</span>
+          </div>
+          <div class="p-stat">
+            <strong>2,400+</strong>
+            <span>Books</span>
+          </div>
+          <div class="p-stat">
+            <strong>40+</strong>
+            <span>Cities</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ── RIGHT FORM PANEL ── -->
+  <section class="right-panel">
+    <div class="form-card" id="formCard">
+
+      <div class="form-card-header">
+        <h1>Log in</h1>
+        <p>Don't have an account? <a href="index.html">Join free</a></p>
+      </div>
+
+      <!-- Social login -->
+      <div class="social-btns">
+        <button class="social-btn" id="googleBtn" type="button" aria-label="Continue with Google">
+          <!-- Google icon -->
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+            <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+            <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/>
+            <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+          </svg>
+          Google
+        </button>
+        <button class="social-btn" id="githubBtn" type="button" aria-label="Continue with GitHub">
+          <!-- GitHub icon -->
+          <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.17 6.839 9.49.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.603-3.369-1.342-3.369-1.342-.454-1.155-1.11-1.463-1.11-1.463-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0 1 12 6.836c.85.004 1.705.115 2.504.337 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.167 22 16.418 22 12c0-5.523-4.477-10-10-10z"/>
+          </svg>
+          GitHub
+        </button>
+      </div>
+
+      <div class="divider">or continue with email</div>
+
+      <!-- Login form -->
+      <form id="loginForm" novalidate aria-label="Log in with email">
+
+        <div class="form-group">
+          <label for="email">Email address</label>
+          <div class="input-wrapper">
+            <span class="input-icon" aria-hidden="true">✉</span>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              placeholder="you@example.com"
+              autocomplete="email"
+              required
+            />
+          </div>
+          <span class="field-error" id="emailError" role="alert"></span>
+        </div>
+
+        <div class="form-group">
+          <label for="password">Password</label>
+          <div class="input-wrapper">
+            <span class="input-icon" aria-hidden="true">🔒</span>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              placeholder="Enter your password"
+              autocomplete="current-password"
+              required
+            />
+            <button type="button" class="pw-toggle" id="pwToggle" aria-label="Show password">👁</button>
+          </div>
+          <span class="field-error" id="passwordError" role="alert"></span>
+        </div>
+
+        <div class="form-row-inline">
+          <label class="checkbox-label">
+            <input type="checkbox" id="rememberMe" />
+            Remember me
+          </label>
+          <a href="#" class="forgot-link" id="forgotLink">Forgot password?</a>
+        </div>
+
+        <button type="submit" class="btn-submit" id="loginBtn">
+          <span class="btn-text">Log In</span>
+          <span class="btn-loading" aria-hidden="true">
+            <span class="spinner"></span>
+            Signing in…
+          </span>
+        </button>
+
+        <p class="form-note">
+          By logging in you agree to our
+          <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>.
+        </p>
+
+      </form>
+
+    </div>
+
+    <!-- Success state (hidden initially) -->
+    <div class="login-success" id="loginSuccess" aria-live="polite">
+      <div class="success-ring" aria-hidden="true">✓</div>
+      <h2>Welcome back!</h2>
+      <p>You're logged in. Ready to discover your next great read?</p>
+      <a href="index.html" class="btn-home">Go to BookBridge →</a>
+    </div>
+
+  </section>
+
+</main>
+
+<!-- Toast container -->
+<div class="toast-container" id="toastContainer" aria-live="polite" aria-atomic="true"></div>
+
+<script>
+  'use strict';
+
+  /* ── TOAST ── */
+  function showToast(msg, type = 'info') {
+    const icons = { success: '✓', error: '✕', info: 'ℹ' };
+    const el = document.createElement('div');
+    el.className = 'toast';
+    el.innerHTML = `<span class="toast-icon ${type}" aria-hidden="true">${icons[type]}</span><span>${msg}</span>`;
+    document.getElementById('toastContainer').appendChild(el);
+    const remove = () => {
+      el.classList.add('out');
+      el.addEventListener('animationend', () => el.remove(), { once: true });
+    };
+    setTimeout(remove, 3800);
+  }
+
+  /* ── PASSWORD TOGGLE ── */
+  document.getElementById('pwToggle').addEventListener('click', function () {
+    const input = document.getElementById('password');
+    const isHidden = input.type === 'password';
+    input.type = isHidden ? 'text' : 'password';
+    this.textContent = isHidden ? '🙈' : '👁';
+    this.setAttribute('aria-label', isHidden ? 'Hide password' : 'Show password');
+  });
+
+  /* ── FORGOT PASSWORD ── */
+  document.getElementById('forgotLink').addEventListener('click', function (e) {
+    e.preventDefault();
+    const email = document.getElementById('email').value.trim();
+    if (email && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      showToast(`Reset link sent to ${email}`, 'success');
+    } else {
+      showToast('Enter your email address first, then click Forgot password.', 'error');
+      document.getElementById('email').focus();
+    }
+  });
+
+  /* ── SOCIAL BUTTONS ── */
+  ['googleBtn', 'githubBtn'].forEach(id => {
+    document.getElementById(id).addEventListener('click', function () {
+      const provider = this.id === 'googleBtn' ? 'Google' : 'GitHub';
+      showToast(`${provider} login coming soon!`, 'info');
+    });
+  });
+
+  /* ── FORM VALIDATION & SUBMIT ── */
+  function validateEmail(val) {
+    if (!val) return 'Please enter your email address.';
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val)) return 'Please enter a valid email address.';
+    return '';
+  }
+  function validatePassword(val) {
+    if (!val) return 'Please enter your password.';
+    if (val.length < 6) return 'Password must be at least 6 characters.';
+    return '';
+  }
+
+  function setError(inputId, errorId, message) {
+    const input = document.getElementById(inputId);
+    const error = document.getElementById(errorId);
+    if (message) {
+      input.classList.add('error');
+      error.textContent = message;
+      return false;
+    }
+    input.classList.remove('error');
+    error.textContent = '';
+    return true;
+  }
+
+  // Real-time clear on input
+  document.getElementById('email').addEventListener('input', function () {
+    if (!validateEmail(this.value.trim())) {
+      setError('email', 'emailError', '');
+    }
+  });
+  document.getElementById('password').addEventListener('input', function () {
+    if (!validatePassword(this.value)) {
+      setError('password', 'passwordError', '');
+    }
+  });
+
+  document.getElementById('loginForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    const email    = document.getElementById('email').value.trim();
+    const password = document.getElementById('password').value;
+
+    const emailOk    = setError('email',    'emailError',    validateEmail(email));
+    const passwordOk = setError('password', 'passwordError', validatePassword(password));
+
+    if (!emailOk || !passwordOk) return;
+
+    // Simulate async login
+    const btn = document.getElementById('loginBtn');
+    btn.classList.add('loading');
+    btn.disabled = true;
+
+    setTimeout(() => {
+      btn.classList.remove('loading');
+      btn.disabled = false;
+
+      // Show success state
+      document.getElementById('formCard').style.display = 'none';
+      const success = document.getElementById('loginSuccess');
+      success.style.display = 'flex';
+      success.focus();
+
+    }, 1400);
+  });
+</script>
+
+</body>
+</html>
